@@ -29,7 +29,9 @@ class DraggableOverlay extends ConsumerStatefulWidget {
 class _DraggableOverlayState extends ConsumerState<DraggableOverlay> {
   /// This method is called when the dragging widget position is updated.
   /// It makes use of [GroupScrollHandler] and [BoardScrollHandler] to check if the group or board should scroll.
-  Future<void> _onDragUpdate() async {
+  Future<void> _onDragUpdate(BuildContext context) async {
+    if (context.mounted == false) return;
+
     final boardState = ref.read(widget.boardState);
     final draggingState = boardState.draggingState;
     final groupState = ref.read(widget.groupState);
@@ -61,7 +63,7 @@ class _DraggableOverlayState extends ConsumerState<DraggableOverlay> {
     return ValueListenableBuilder(
       valueListenable: draggingState.feedbackOffset,
       builder: (ctx, Offset value, child) {
-        _onDragUpdate();
+        _onDragUpdate(context);
         return draggingState.draggableType != DraggableType.none
             ? Positioned(
                 left: value.dx,
