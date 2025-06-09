@@ -306,6 +306,12 @@ class _BoardState extends ConsumerState<Board> {
   }
 
   @override
+  void dispose() {
+    _boardScrollController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     WidgetsBinding.instance.addPostFrameCallback((_) => _getBoardOffset());
     return Scaffold(

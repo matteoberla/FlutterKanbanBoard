@@ -30,8 +30,6 @@ class _DraggableOverlayState extends ConsumerState<DraggableOverlay> {
   /// This method is called when the dragging widget position is updated.
   /// It makes use of [GroupScrollHandler] and [BoardScrollHandler] to check if the group or board should scroll.
   Future<void> _onDragUpdate(BuildContext context) async {
-    if (context.mounted == false) return;
-
     final boardState = ref.read(widget.boardState);
     final draggingState = boardState.draggingState;
     final groupState = ref.read(widget.groupState);
@@ -39,21 +37,23 @@ class _DraggableOverlayState extends ConsumerState<DraggableOverlay> {
     if (draggingState.draggableType == DraggableType.none) return;
 
     /// Check if the group should scroll.
-    await GroupScrollHandler.checkGroupScroll(
-        boardState: boardState,
-        scrollConfig: widget.groupScrollConfig,
-        scrollController:
-            boardState.groups[draggingState.currentGroupIndex].scrollController,
-        isScrolling: groupState.isScrolling,
-        setScrolling: (value) => groupState.setScrolling(value));
+    if (context.mounted) {
+      await GroupScrollHandler.checkGroupScroll(
+          boardState: boardState,
+          scrollConfig: widget.groupScrollConfig,
+          scrollController: boardState
+              .groups[draggingState.currentGroupIndex].scrollController,
+          isScrolling: groupState.isScrolling,
+          setScrolling: (value) => groupState.setScrolling(value));
 
-    /// Check if the board should scroll.
-    await BoardScrollHandler.checkBoardScroll(
-        boardState: boardState,
-        scrollConfig: widget.boardScrollConfig,
-        scrollController: widget.boardScrollController,
-        isScrolling: boardState.isScrolling,
-        setScrolling: (value) => boardState.setScrolling(value));
+      /// Check if the board should scroll.
+      await BoardScrollHandler.checkBoardScroll(
+          boardState: boardState,
+          scrollConfig: widget.boardScrollConfig,
+          scrollController: widget.boardScrollController,
+          isScrolling: boardState.isScrolling,
+          setScrolling: (value) => boardState.setScrolling(value));
+    }
   }
 
   @override
