@@ -317,10 +317,6 @@ class _BoardState extends ConsumerState<Board> {
         onGroupItemMove: widget.onGroupItemMove,
         onGroupMove: widget.onGroupMove,
         child: Container(
-          padding: const EdgeInsets.only(
-            top: BOARD_PADDING,
-            left: BOARD_PADDING,
-          ),
           decoration: widget.boardDecoration,
           child: Stack(
             fit: StackFit.passthrough,
