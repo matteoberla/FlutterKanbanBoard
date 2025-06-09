@@ -309,7 +309,6 @@ class _BoardState extends ConsumerState<Board> {
   Widget build(BuildContext context) {
     WidgetsBinding.instance.addPostFrameCallback((_) => _getBoardOffset());
     return Scaffold(
-      backgroundColor: Colors.white,
       body: KanbanGestureListener(
         boardgroupController: _groupStateController,
         boardStateController: _boardStateController,
