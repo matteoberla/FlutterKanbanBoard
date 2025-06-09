@@ -348,20 +348,23 @@ class GroupScrollHandler {
     required void Function(bool value) setScrolling,
   }) async {
     final defaultScrollConfig = PlatformScrollConfiguration.groupScrollConfig;
-    await ScrollHandler._downsideScroll(
-      boardState: boardState,
-      scrollConfig: scrollConfig ?? defaultScrollConfig,
-      scrollController: scrollController,
-      isScrolling: isScrolling,
-      setScrolling: setScrolling,
-    );
-    await ScrollHandler._upsideScroll(
-      boardState: boardState,
-      scrollConfig: scrollConfig ?? defaultScrollConfig,
-      scrollController: scrollController,
-      isScrolling: isScrolling,
-      setScrolling: setScrolling,
-    );
+
+    if (scrollController.hasClients) {
+      await ScrollHandler._downsideScroll(
+        boardState: boardState,
+        scrollConfig: scrollConfig ?? defaultScrollConfig,
+        scrollController: scrollController,
+        isScrolling: isScrolling,
+        setScrolling: setScrolling,
+      );
+      await ScrollHandler._upsideScroll(
+        boardState: boardState,
+        scrollConfig: scrollConfig ?? defaultScrollConfig,
+        scrollController: scrollController,
+        isScrolling: isScrolling,
+        setScrolling: setScrolling,
+      );
+    }
   }
 }
 
