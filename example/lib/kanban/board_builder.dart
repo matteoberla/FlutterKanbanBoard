@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:dotted_border/dotted_border.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:kanban/constants/kanban_data.dart';
 import 'package:kanban_board/kanban_board.dart';
@@ -50,7 +51,6 @@ class _KanbanCanvasState extends State<KanbanCanvas> {
                   height: 100,
                   width: 100,
                 ),
-                
                 groupItemBuilder: groupItemBuilder,
               ),
             )
@@ -97,7 +97,7 @@ class _KanbanCanvasState extends State<KanbanCanvas> {
   }
 
   double get groupWidth =>
-      Platform.isWindows || Platform.isLinux || Platform.isMacOS
+      kIsWeb || Platform.isWindows || Platform.isLinux || Platform.isMacOS
           ? 350
           : MediaQuery.sizeOf(context).width * 0.8;
 

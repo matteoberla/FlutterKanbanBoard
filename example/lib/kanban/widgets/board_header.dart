@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class BoardHeader extends StatelessWidget {
@@ -14,16 +15,18 @@ class BoardHeader extends StatelessWidget {
           Text(
             "Lakhan's Board",
             style: TextStyle(
-              fontSize:
-                  Platform.isWindows || Platform.isLinux || Platform.isMacOS
-                      ? 26
-                      : 24,
+              fontSize: kIsWeb ||
+                      Platform.isWindows ||
+                      Platform.isLinux ||
+                      Platform.isMacOS
+                  ? 26
+                  : 24,
               color: Colors.black,
               fontWeight: FontWeight.w900,
             ),
           ),
           const Spacer(),
-          Platform.isWindows || Platform.isLinux || Platform.isMacOS
+          kIsWeb || Platform.isWindows || Platform.isLinux || Platform.isMacOS
               ? Row(
                   children: [
                     const Icon(

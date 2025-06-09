@@ -124,9 +124,7 @@ class _KanbanBoardState extends State<KanbanBoard> {
   @override
   Widget build(BuildContext context) {
     return ProviderScope(
-        child: MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Board(
+      child: Board(
         groups: widget.groups,
         groupItemBuilder: widget.groupItemBuilder,
         controller: widget.controller,
@@ -144,7 +142,7 @@ class _KanbanBoardState extends State<KanbanBoard> {
         groupGhost: widget.groupGhost,
         itemGhost: widget.itemGhost,
       ),
-    ));
+    );
   }
 }
 
