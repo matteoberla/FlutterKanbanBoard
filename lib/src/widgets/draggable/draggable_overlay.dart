@@ -37,7 +37,7 @@ class _DraggableOverlayState extends ConsumerState<DraggableOverlay> {
     if (draggingState.draggableType == DraggableType.none) return;
 
     /// Check if the group should scroll.
-    if (context.mounted) {
+    if (context.mounted && widget.boardScrollController.hasClients) {
       await GroupScrollHandler.checkGroupScroll(
           boardState: boardState,
           scrollConfig: widget.groupScrollConfig,
